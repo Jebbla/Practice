@@ -1,25 +1,16 @@
-var firstGranim = new Granim({
-    element: "#first",
-    name: "first-gradient",
-    direction: "diagonal",
-    opacity: [1, 1],
-    states: {
+$(document).ready(function(){
+var granimInstance = new Granim({
+  element: '#canvas-basic',
+  direction: 'left-right',
+  isPausedWhenNotInView: true,
+  states : {
       "default-state": {
-        gradients: [["#8BC34A", "#FF9800"]]
+          gradients: [
+              ['#ff9966', '#ff5e62'],
+              ['#00F260', '#0575E6'],
+              ['#e1eec3', '#f05053']
+          ]
       }
-    }
-  });
-  
-  var secondGranim = new Granim({
-    element: "#second",
-    name: "second-gradient",
-    elToSetClassOn: ".wrapper",
-    direction: "top-bottom",
-    opacity: [1, 1],
-    states: {
-      "default-state": {
-        gradients: [["#9C27B0", "#E91E63"], ["#009688", "#8BC34A"]],
-        transitionSpeed: 2000
-      }
-    }
-  });
+  }
+});
+});
