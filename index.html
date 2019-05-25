@@ -7,33 +7,35 @@
   <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/reset.css">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script src="granim.js-2.0.0/granim.js-2.0.0/dist/granim.min.js"></script>
+  <script src="assets/javascript/granim.min.js"></script>
 
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="assets/js/app.js"></script>-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="assets/javascript/app.js"></script>
+
 
 </head>
 
 
 
   <!--Granim.js -->
-  <!--<canvas id="canvas-basic"></canvas>-->
+ 
 
 
+    
 
 <body>
-    <div class="jumbotron">
-        <h1 class="display">Recycle It!</h1>
-      
-      </div>
+    
+        
+    <canvas id="canvas-image-blending" width= "1600" height="200"></canvas>
+    
     <form class="form-inline">
         <label class="sr-only" for="inlineFormInputName2">Zip Code</label>
         <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Zip Code">
       
-        <select class="form-control">
+        <select class="form-control" id="radius">
             <option>Radius</option>
           </select>
-          <select class="form-control">
+          <select class="form-control" id="materials">
               <option>Materials</option>
             </select>
       
@@ -43,7 +45,10 @@
         <div class= "container" id= "list">List placeholder</div>
       </form>
 
+      
      
+
+
 </body>
 
 <footer>Awesomely designed by Laura, Vincent, and Jessica</footer>
