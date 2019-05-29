@@ -10,11 +10,28 @@ body{
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: -1;
+
+  
+}
+h1{
+  font-family: 'Acme', sans-serif;
+  font-size: 40px;
+  text-align: center;
+  z-index: 10;
 }
  
  
 .form-inline{
   font-family: 'Acme', sans-serif;
+  text-align: center;
+}
+
+#recycle-form{
+  padding-left: 300px;
+  
+}
+
 }
 
 footer{
