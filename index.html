@@ -38,8 +38,19 @@
                   <option>Materials</option>
                 </select>
           
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-            
+             
+                <button onclick="test()">Submit</button>
+                
+                <!-- add this line for function to write into -->
+                <p id="demo"></p>   
+                
+                <script type="text/javascript">
+                function test(){
+                    var userInput = document.getElementById("userInput").value;
+                    document.getElementById("demo").innerHTML = userInput;
+                }
+                </script>
+
     
             
           </form>
