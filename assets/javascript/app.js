@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    var zipCode;
+
     var granimInstance = new Granim({
         element: '#canvas-image-blending',
         direction: 'diagonal',
@@ -20,8 +22,8 @@ $(document).ready(function () {
             }
         }
     });
-$("#selectID").change(function(){
-    var selected = $(this).find('option:selected');
+    $("#selectID").change(function () {
+        var selected = $(this).find('option:selected');
 
 })
 var materialsArr = [
@@ -49,8 +51,6 @@ var materialsArr = [
     materialsArr.forEach(function (element) {
         var optionTag = $("<option>")
         optionTag.text(element.name)
-        
-
         optionTag.attr('id', element.name)
         optionTag.attr("materialId", element.id);
         $("#materials").append(optionTag)
@@ -65,8 +65,11 @@ var materialsArr = [
         $("#radius").append(optionTag)
     });
 
-    var zipCode = "55433";
-    var materialID ="104";
+
+
+
+    // var zipCode = "55407";
+    // var materialID ="104";
     var latitude, longitude;
 
     var earthQuery = function (materialIdfromPage) {
@@ -75,7 +78,7 @@ var materialsArr = [
             + apiKey
 
         console.log(queryURL);
-        
+
         $.ajax({
             method: "GET",
             url: queryURL,
@@ -85,17 +88,17 @@ var materialsArr = [
             latitude = parsedResponse.result.latitude;
             longitude = parsedResponse.result.longitude;
             console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-            +"&latitude="+latitude
-            +"&longitude="+longitude
-            +"&material_id="+materialIdfromPage);
+                + "&latitude=" + latitude
+                + "&longitude=" + longitude
+                + "&material_id=" + materialIdfromPage);
             $.ajax({
-                method: "GET", 
+                method: "GET",
                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-                +"&latitude="+latitude
-                +"&longitude="+longitude
-                +"&material_id="+materialIdfromPage,
-                
-            }).then(function(result){
+                    + "&latitude=" + latitude
+                    + "&longitude=" + longitude
+                    + "&material_id=" + materialIdfromPage,
+
+            }).then(function (result) {
                 //logic for actual location data
                 console.log(result);
             })
@@ -106,14 +109,16 @@ var materialsArr = [
     // earthQuery();
 
 
-    $("#submit").click(function(event){
+    $("#submit").click(function (event) {
         event.preventDefault();
         var val = $('#materials').val();
         var option = $('#' + val);
         var materialID = option.attr('materialId');
         console.log(materialID)
-
+        zipCode = $('#inlineFormInputName2').val()
+        console.log('zipCode====', zipCode)
         earthQuery(materialID);
+        $('#inlineFormInputName2').val('')
     })
 
 
