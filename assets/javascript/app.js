@@ -98,9 +98,18 @@ var materialsArr = [
                     + "&longitude=" + longitude
                     + "&material_id=" + materialIdfromPage,
 
-            }).then(function (result) {
+            }).then(function (resultA) {
                 //logic for actual location data
-                console.log(result);
+                console.log(resultA);
+                var resultB = JSON.parse(resultA)
+                console.log(resultB);
+                if(typeof resultB.result !== typeof undefined){
+                    var resultDiv = $('<div>');
+                    resultDiv.append("Name:",resultB.result[0].description, "<br>");
+                    resultDiv.append("Distance:", resultB.result[0].distance);
+                    $('#list').append(resultDiv)
+
+                }
             })
 
         });
@@ -121,7 +130,14 @@ var materialsArr = [
         $('#inlineFormInputName2').val('')
     })
 
-
-
+    function displayGif(response) {
+        $('#cartoons').empty();
+        for (var i = 0; i < response.data.length; i++) {
+            var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
+            var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
+                '" data-still=" ' + response.data[i].images.fixed_height_still.url +
+                ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
+        }
+    }
 });
 
