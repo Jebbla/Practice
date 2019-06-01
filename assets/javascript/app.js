@@ -20,50 +20,39 @@ $(document).ready(function () {
             }
         }
     });
+$("#selectID").change(function(){
+    var selected = $(this).find('option:selected');
 
-
+})
     var materialsArr = [
-        "Appliances & Equipment",
-        "Asphalt",
-        "Automobiles",
-        "Batteries",
-        "Bottles & Cans",
-        "Bricks, Masonry, & Stone",
-        "Cardboard & Paper",
-        "Carpet Padding/Foam",
-        "Ceiling Tiles",
-        "Concrete", "Construction & Demolition Debris",
-        "Deconstructed & Salvaged Items",
-        "Dirt- Clean Fill",
-        "Donations",
-        "Drums, Barrels, & Buckets",
-        "Drywall- Clean/Unpainted",
-        "Drywall- Demo & Painted",
-        "eWaste- Electronics/TVs/Computers",
-        "Glass- Plate or Tempered",
-        "Green Waste- Yard/Landscape",
-        "Hauling Services",
-        "Hazardous Waste & Materials",
-        "Mattress",
-        "Metals- Ferrous",
-        "Metals- Non Ferrous",
-        "Oil- Commercial Grade",
-        "Oil- Food Grade",
-        "Paint",
-        "Plastics- Consumer Grade",
-        "Plastics- Industrial Grade",
-        "Porcelain",
-        "Rock, Sand, & Gravel",
-        "Roofing Asphalt",
-        "Tires",
-        "Trash",
-        "Wood- Clean Lumber/Pallets",
-        "Wood- Treated/Painted"
+        {name:"Appliances & Equipment", id:1},
+        {name:"Tires", id:5},
+        {name:"Truck Tires", id:633},
+        {name:"Latex Paint", id:418},
+        {name:"Paint Thinners", id:191},
+        {name:"Porcelain Products", id:214},
+        {name:"Sand", id:386},
+        {name:"Mattresses", id:226},
+        {name:"Construction Debris", id:385},
+        {name:"Plastic Bottle", id:60},
+        {name:"Adult Toys", id:353},
+        {name:"Batteries", id:104},
+        {name:"Air Conditioners", id:591},
+        {name:"Aluminum Cans", id:70},
+        {name:"Vehicles", id:267},
+        {name:"Small Appliances", id:362},
+        {name:"Washer/Dryers", id:573},
+        {name:"Asphalt", id:212},
+        {name:"Cardboard & Paper", id:40},
+        
     ]
 
     materialsArr.forEach(function (element) {
         var optionTag = $("<option>")
-        optionTag.text(element)
+        optionTag.text(element.name)
+        
+        optionTag.attr('id', element.name)
+        optionTag.attr("materialId", element.id);
         $("#materials").append(optionTag)
     });
 
@@ -77,16 +66,16 @@ $(document).ready(function () {
     });
 
     var zipCode = "55407";
-    var materialID = 1;
+    var materialID ="104";
     var latitude, longitude;
 
-    var earthQuery = function () {
+    var earthQuery = function (materialIdfromPage) {
         var apiKey = "3fb6e10a90808f0d";
         var queryURL = "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getPostalData?postal_code=" + zipCode + "&country=US&api_key="
             + apiKey
 
         console.log(queryURL);
-
+        
         $.ajax({
             method: "GET",
             url: queryURL,
@@ -98,13 +87,13 @@ $(document).ready(function () {
             console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
             +"&latitude="+latitude
             +"&longitude="+longitude
-            +"&material_id="+materialID);
+            +"&material_id="+materialIdfromPage);
             $.ajax({
                 method: "GET", 
                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
                 +"&latitude="+latitude
                 +"&longitude="+longitude
-                +"&material_id="+materialID,
+                +"&material_id="+materialIdfromPage,
                 
             }).then(function(result){
                 //logic for actual location data
@@ -113,8 +102,19 @@ $(document).ready(function () {
 
         });
     }
-    earthQuery();
 
+    // earthQuery();
+
+
+    $("#submit").click(function(event){
+        event.preventDefault();
+        var val = $('#materials').val();
+        var option = $('#' + val);
+        var materialID = option.attr('materialId');
+        console.log(materialID)
+
+        earthQuery(materialID);
+    })
 
 
 
