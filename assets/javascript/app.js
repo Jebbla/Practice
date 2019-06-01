@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    var zipCode;
+
     var granimInstance = new Granim({
         element: '#canvas-image-blending',
         direction: 'diagonal',
@@ -49,7 +51,6 @@ $("#selectID").change(function(){
     materialsArr.forEach(function (element) {
         var optionTag = $("<option>")
         optionTag.text(element.name)
-
         optionTag.attr('id', element.name)
         optionTag.attr("materialId", element.id);
         $("#materials").append(optionTag)
@@ -64,8 +65,11 @@ $("#selectID").change(function(){
         $("#radius").append(optionTag)
     });
 
-    var zipCode;
-    var materialID ="104";
+
+
+   
+    // var zipCode = "55407";
+    // var materialID ="104";
     var latitude, longitude;
 
     var earthQuery = function (materialIdfromPage) {
@@ -111,8 +115,10 @@ $("#selectID").change(function(){
         var option = $('#' + val);
         var materialID = option.attr('materialId');
         console.log(materialID)
-
+        zipCode = $('#inlineFormInputName2').val()
+        console.log('zipCode====', zipCode)
         earthQuery(materialID);
+        $('#inlineFormInputName2').val('')
     })
 
 
