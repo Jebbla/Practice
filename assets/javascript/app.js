@@ -130,14 +130,6 @@ var materialsArr = [
         $('#inlineFormInputName2').val('')
     })
 
-    function displayGif(response) {
-        $('#cartoons').empty();
-        for (var i = 0; i < response.data.length; i++) {
-            var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
-            var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
-                '" data-still=" ' + response.data[i].images.fixed_height_still.url +
-                ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
-        }
-    }
+  
 });
 
