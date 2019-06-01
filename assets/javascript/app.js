@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    // Granim
     var granimInstance = new Granim({
         element: '#canvas-image-blending',
         direction: 'diagonal',
@@ -21,7 +22,7 @@ $(document).ready(function() {
         }
     });
 
-
+    //  Materials
     var materialsArr = [
         "Appliances & Equipment",
         "Asphalt",
@@ -77,6 +78,63 @@ $(document).ready(function() {
         $("#radius").append(optionTag)
     });
 
+    var zipCode = "55407";
+    var materialID = 1;
+    var latitude, longitude;
+
+    var earthQuery = function() {
+        var apiKey = "3fb6e10a90808f0d";
+        var queryURL = "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getPostalData?postal_code=" + zipCode + "&country=US&api_key=" +
+            apiKey
+
+        console.log(queryURL);
+
+        $.ajax({
+            method: "GET",
+            url: queryURL,
+        }).then(function(response) {
+            console.log(response);
+            var parsedResponse = JSON.parse(response);
+            latitude = parsedResponse.result.latitude;
+            longitude = parsedResponse.result.longitude;
+            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+                "&latitude=" + latitude +
+                "&longitude=" + longitude +
+                "&material_id=" + materialID);
+            $.ajax({
+                method: "GET",
+                url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+                    "&latitude=" + latitude +
+                    "&longitude=" + longitude +
+                    "&material_id=" + materialID,
+
+            }).then(function(result) {
+                //logic for actual location data
+                console.log(result);
+            })
+
+        });
+    }
+    earthQuery();
+
+    // >>>> Earth911 - API
+
+    materialsArr.forEach(function(element) {
+        var optionTag = $("<option>")
+        optionTag.text(element)
+        $("#materials").append(optionTag)
+    });
+
+    var radiusArr = [
+        "5", "10", "15", "25", "50"
+    ]
+
+    radiusArr.forEach(function(element) {
+        var optionTag = $("<option>")
+        optionTag.text(element)
+        $("#radius").append(optionTag)
+    });
+
 
     var zipCode = "";
 
@@ -108,44 +166,6 @@ $(document).ready(function() {
         });
     }
 
-    "https://API.earth911.com/earth911.searchLocations?latitude=44.82&longitude=-93.37&api_key=3fb6e10a90808f0d"
-
-    //     var zipCode = "55407";
-    //     var materialID = "1";
-    //     var latitude, longitude;
-    //     var earthQuery = function () {
-    //         var apiKey = "3fb6e10a90808f0d";
-    //         var queryURL = "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getPostalData?postal_code=" + zipCode + "&country=US&api_key="
-    //             + apiKey
-    //         console.log(queryURL);
-
-    //         $.ajax({
-    //             method: "GET",
-    //             url: queryURL,
-    //         }).then(function (response) {
-    //             console.log(response);
-    //             var parsedResponse = JSON.parse(response);
-    //             latitude = parsedResponse.result.latitude;
-    //             longitude = parsedResponse.result.longitude;
-    //             console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-    //             +"&latitude="+latitude
-    //             +"&longitude="+longitude
-    //             +"&material_id="+materialID);
-    //             $.ajax({
-    //                 method: "GET", 
-    //                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-    //                 +"&latitude="+latitude
-    //                 +"&longitude="+longitude
-    //                 +"&material_id="+materialID,
-
-    //             }).then(function(result){
-    //                 //logic for actual location data
-    //                 console.log(result);
-    //             })
-    //         });
-    //     }
-    //     earthQuery();
-    // });
 
 
 });
