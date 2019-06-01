@@ -24,31 +24,32 @@ $("#selectID").change(function(){
     var selected = $(this).find('option:selected');
 
 })
-    var materialsArr = [
-        {name:"Tires", id:5},
-        {name:"Truck-Tires", id:633},
-        {name:"Latex-Paint", id:418},
-        {name:"Paint-Thinners", id:191},
-        {name:"Porcelain-Products", id:214},
-        {name:"Sand", id:386},
-        {name:"Mattresses", id:226},
-        {name:"Construction-Debris", id:385},
-        {name:"Plastic-Bottle", id:60},
-        {name:"Adult-Toys", id:353},
-        {name:"Batteries", id:104},
-        {name:"Air-Conditioners", id:591},
-        {name:"Aluminum-Cans", id:70},
-        {name:"Vehicles", id:267},
-        {name:"Small-Appliances", id:362},
-        {name:"Washer/Dryers", id:573},
-        {name:"Asphalt", id:212},
-        {name:"Cardboard", id:40},
+var materialsArr = [
+    {name:"Air-Conditioners", id:591},
+    {name:"Aluminum-Cans", id:70},
+    {name:"Asphalt", id:212},
+    {name:"Batteries", id:104},
+    {name:"Cardboard", id:40},
+    {name:"Construction-Debris", id:385},
+    {name:"Latex-Paint", id:418},
+    {name:"Adult-Toys", id:353},
+    {name:"Mattresses", id:226},
+    {name:"Paint-Thinners", id:191},
+    {name:"Plastic-Bottle", id:60},
+    {name:"Porcelain-Products", id:214},
+    {name:"Sand", id:386},
+    {name:"Small-Appliances", id:362},
+    {name:"Tires", id:5},
+    {name:"Truck-Tires", id:633},
+    {name:"Vehicles", id:267},
+    {name:"Washer/Dryers", id:573},
         
     ]
 
     materialsArr.forEach(function (element) {
         var optionTag = $("<option>")
         optionTag.text(element.name)
+        
 
         optionTag.attr('id', element.name)
         optionTag.attr("materialId", element.id);
@@ -64,7 +65,7 @@ $("#selectID").change(function(){
         $("#radius").append(optionTag)
     });
 
-    var zipCode;
+    var zipCode = "55433";
     var materialID ="104";
     var latitude, longitude;
 
