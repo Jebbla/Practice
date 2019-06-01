@@ -11,10 +11,10 @@ var granimInstance = new Granim({
   states : {
       "default-state": {
         gradients: [
-          ['#29323c', '#485563'],
-          ['#FF6B6B', '#556270'],
+          ['#306689', '#485563'],
+          ['#FF6B6B', '#562345'],
           ['#80d3fe', '#7ea0c4'],
-          ['#f0ab51', '#eceba3']
+          ['#f3dc51', '#3ceba3']
       ],
           transitionSpeed: 7000
       }

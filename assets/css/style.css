@@ -31,8 +31,14 @@ h1{
   padding-left: 300px;
   
 }
-
+#map {
+  font-family: 'Acme', sans-serif;
 }
+
+#list {
+  font-family: 'Acme', sans-serif;
+}
+
 
 footer{
   font-family: 'Acme', sans-serif;
