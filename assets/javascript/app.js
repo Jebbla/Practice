@@ -1,5 +1,7 @@
 $(document).ready(function() {
+
     var zipCode;
+
     var granimInstance = new Granim({
         element: '#canvas-image-blending',
         direction: 'diagonal',
@@ -22,6 +24,7 @@ $(document).ready(function() {
     });
     $("#selectID").change(function() {
         var selected = $(this).find('option:selected');
+
     })
     var materialsArr = [
         { name: "Air-Conditioners", id: 591 },
@@ -44,6 +47,7 @@ $(document).ready(function() {
         { name: "Washer/Dryers", id: 573 },
 
     ]
+
     materialsArr.forEach(function(element) {
         var optionTag = $("<option>")
         optionTag.text(element.name)
@@ -51,6 +55,7 @@ $(document).ready(function() {
         optionTag.attr("materialId", element.id);
         $("#materials").append(optionTag)
     });
+
     var radiusArr = [
         "5", "10", "15", "25", "50"
     ]
@@ -59,47 +64,60 @@ $(document).ready(function() {
         optionTag.text(element)
         $("#radius").append(optionTag)
     });
+
+
+
+
     // var zipCode = "55407";
     // var materialID ="104";
     var latitude, longitude;
+
     var earthQuery = function(materialIdfromPage) {
-            var apiKey = "3fb6e10a90808f0d";
-            var queryURL = "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getPostalData?postal_code=" + zipCode + "&country=US&api_key=" +
-                apiKey
-            console.log(queryURL);
+        var apiKey = "3fb6e10a90808f0d";
+        var queryURL = "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getPostalData?postal_code=" + zipCode + "&country=US&api_key=" +
+            apiKey
+
+        console.log(queryURL);
+
+        $.ajax({
+            method: "GET",
+            url: queryURL,
+        }).then(function(response) {
+            console.log(response);
+            var parsedResponse = JSON.parse(response);
+            latitude = parsedResponse.result.latitude;
+            longitude = parsedResponse.result.longitude;
+            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+                "&latitude=" + latitude +
+                "&longitude=" + longitude +
+                "&material_id=" + materialIdfromPage);
             $.ajax({
                 method: "GET",
-                url: queryURL,
-            }).then(function(response) {
-                console.log(response);
-                var parsedResponse = JSON.parse(response);
-                latitude = parsedResponse.result.latitude;
-                longitude = parsedResponse.result.longitude;
-                console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+                url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
                     "&latitude=" + latitude +
                     "&longitude=" + longitude +
-                    "&material_id=" + materialIdfromPage);
-                $.ajax({
-                    method: "GET",
-                    url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
-                        "&latitude=" + latitude +
-                        "&longitude=" + longitude +
-                        "&material_id=" + materialIdfromPage,
-                }).then(function(resultA) {
-                    //logic for actual location data
-                    console.log(resultA);
-                    var resultB = JSON.parse(resultA)
-                    console.log(resultB);
-                    if (typeof resultB.result !== typeof undefined) {
-                        var resultDiv = $('<div>');
-                        resultDiv.append("Name:", resultB.result[0].description, "<br>");
-                        resultDiv.append("Distance:", resultB.result[0].distance);
-                        $('#list').append(resultDiv)
-                    }
-                })
-            });
-        }
-        // earthQuery();
+                    "&material_id=" + materialIdfromPage,
+
+            }).then(function(resultA) {
+                //logic for actual location data
+                console.log(resultA);
+                var resultB = JSON.parse(resultA)
+                console.log(resultB);
+                if (typeof resultB.result !== typeof undefined) {
+                    var resultDiv = $('<div>');
+                    resultDiv.append("Name:", resultB.result[0].description, "<br>");
+                    resultDiv.append("Distance:", resultB.result[0].distance);
+                    $('#list').append(resultDiv)
+
+                }
+            })
+
+        });
+    }
+
+    // earthQuery();
+
+
     $("#submit").click(function(event) {
         event.preventDefault();
         var val = $('#materials').val();
