@@ -22,30 +22,30 @@ $(document).ready(function () {
             }
         }
     });
-$("#selectID").change(function(){
-    var selected = $(this).find('option:selected');
+    $("#selectID").change(function () {
+        var selected = $(this).find('option:selected');
 
-})
+    })
     var materialsArr = [
-        {name:"Tires", id:5},
-        {name:"Truck-Tires", id:633},
-        {name:"Latex-Paint", id:418},
-        {name:"Paint-Thinners", id:191},
-        {name:"Porcelain-Products", id:214},
-        {name:"Sand", id:386},
-        {name:"Mattresses", id:226},
-        {name:"Construction-Debris", id:385},
-        {name:"Plastic-Bottle", id:60},
-        {name:"Adult-Toys", id:353},
-        {name:"Batteries", id:104},
-        {name:"Air-Conditioners", id:591},
-        {name:"Aluminum-Cans", id:70},
-        {name:"Vehicles", id:267},
-        {name:"Small-Appliances", id:362},
-        {name:"Washer/Dryers", id:573},
-        {name:"Asphalt", id:212},
-        {name:"Cardboard", id:40},
-        
+        { name: "Air-Conditioners", id: 591 },
+        { name: "Aluminum-Cans", id: 70 },
+        { name: "Asphalt", id: 212 },
+        { name: "Batteries", id: 104 },
+        { name: "Cardboard", id: 40 },
+        { name: "Construction-Debris", id: 385 },
+        { name: "Latex-Paint", id: 418 },
+        { name: "Adult-Toys", id: 353 },
+        { name: "Mattresses", id: 226 },
+        { name: "Paint-Thinners", id: 191 },
+        { name: "Plastic-Bottle", id: 60 },
+        { name: "Porcelain-Products", id: 214 },
+        { name: "Sand", id: 386 },
+        { name: "Small-Appliances", id: 362 },
+        { name: "Tires", id: 5 },
+        { name: "Truck-Tires", id: 633 },
+        { name: "Vehicles", id: 267 },
+        { name: "Washer/Dryers", id: 573 },
+
     ]
 
     materialsArr.forEach(function (element) {
@@ -67,7 +67,7 @@ $("#selectID").change(function(){
 
 
 
-   
+
     // var zipCode = "55407";
     // var materialID ="104";
     var latitude, longitude;
@@ -78,7 +78,7 @@ $("#selectID").change(function(){
             + apiKey
 
         console.log(queryURL);
-        
+
         $.ajax({
             method: "GET",
             url: queryURL,
@@ -88,17 +88,17 @@ $("#selectID").change(function(){
             latitude = parsedResponse.result.latitude;
             longitude = parsedResponse.result.longitude;
             console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-            +"&latitude="+latitude
-            +"&longitude="+longitude
-            +"&material_id="+materialIdfromPage);
+                + "&latitude=" + latitude
+                + "&longitude=" + longitude
+                + "&material_id=" + materialIdfromPage);
             $.ajax({
-                method: "GET", 
+                method: "GET",
                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d"
-                +"&latitude="+latitude
-                +"&longitude="+longitude
-                +"&material_id="+materialIdfromPage,
-                
-            }).then(function(result){
+                    + "&latitude=" + latitude
+                    + "&longitude=" + longitude
+                    + "&material_id=" + materialIdfromPage,
+
+            }).then(function (result) {
                 //logic for actual location data
                 console.log(result);
             })
@@ -109,7 +109,7 @@ $("#selectID").change(function(){
     // earthQuery();
 
 
-    $("#submit").click(function(event){
+    $("#submit").click(function (event) {
         event.preventDefault();
         var val = $('#materials').val();
         var option = $('#' + val);
