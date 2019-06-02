@@ -130,6 +130,6 @@ var materialsArr = [
         $('#inlineFormInputName2').val('')
     })
 
-    
+
 });
 
