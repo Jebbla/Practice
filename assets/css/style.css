@@ -1,42 +1,42 @@
-body{
-  background-color: whitesmoke;
+body {
+    background-color: whitesmoke;
 }
+
 #canvas-image {
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-
-  
-}
-h1{
-  font-family: 'Acme', sans-serif;
-  font-size: 40px;
-  text-align: center;
-  z-index: 10;
-}
- 
- 
-.form-inline{
-  font-family: 'Acme', sans-serif;
-  text-align: center;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
 }
 
-#recycle-form{
-  padding-left: 300px;
-  
+h1 {
+    font-family: 'Acme', sans-serif;
+    font-size: 50px;
+    text-align: center;
+    /* margin: 10px; */
 }
 
+#head {
+    border-color: rgb(61, 59, 59);
+    padding: 10px;
 }
 
-footer{
-  font-family: 'Acme', sans-serif;
-  text-align: center;
+.form-inline {
+    font-family: 'Acme', sans-serif;
+    text-align: center;
 }
 
+#recycle-form {
+    padding-left: 300px;
+}
 
+footer {
+    display: block;
+    text-align: center;
+    margin-top: 50%;
+}
