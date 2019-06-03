@@ -22,8 +22,14 @@ h1 {
 }
 
 #head {
-    border-color: rgb(61, 59, 59);
     padding: 10px;
+}
+
+#br {
+    height: 1px;
+    background-color: #75797c1c;
+    margin-bottom: 12px;
+    width: 100%;
 }
 
 .form-inline {
