@@ -25,6 +25,9 @@ h1 {
     padding: 10px;
 }
 
+
+/* break after head */
+
 #br {
     height: 1px;
     background-color: #75797c1c;
@@ -32,17 +35,32 @@ h1 {
     width: 100%;
 }
 
+#inputRow {
+    margin-bottom: 5px;
+}
+
 .form-inline {
     font-family: 'Acme', sans-serif;
     text-align: center;
 }
 
+
+/* shifts input area to the right */
+
 #recycle-form {
     padding-left: 300px;
+}
+
+
+/* map display */
+
+#map {
+    height: 360px;
+    width: 100%;
 }
 
 footer {
     display: block;
     text-align: center;
-    margin-top: 50%;
+    margin-top: 5%;
 }
