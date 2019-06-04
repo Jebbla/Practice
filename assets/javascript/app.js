@@ -83,7 +83,8 @@ $(document).ready(function() {
             var parsedResponse = JSON.parse(response);
             latitude = parsedResponse.result.latitude;
             longitude = parsedResponse.result.longitude;
-            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+            city = parsedResponse.result.city;
+            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
                 "&latitude=" + latitude +
                 "&longitude=" + longitude +
                 "&material_id=" + materialIdfromPage);
@@ -109,14 +110,40 @@ $(document).ready(function() {
                 // creates for loop displaying name and distance
                 if (typeof resultB.result !== typeof undefined) {
                     for (var i = 0; i < resultB.result.length; i++) {
+                        var locationId = resultB.result[i].location_id;
+                        var address = "";
                         var resultDiv = $('<div id="facilities">');
                         resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
-                        resultDiv.append("Distance: " + resultB.result[i].distance);
+                        resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
+                        $.ajax({
+                            method: "GET",
+                            url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
+                                "&location_id=" + locationId,
+
+                            // appends address
+                        }).then(function(locationResult) {
+                            var resultObj = JSON.parse(locationResult)
+                            if (typeof resultObj.result[locationId].address !== typeof undefined) {
+                                address = resultObj.result[locationId].address + " " + resultObj.result[locationId].city;
+                                console.log("address FOUND!", address);
+                                resultDiv.append("Address: " + address + "<br>");
+                            }
+                            //appends phone number 
+                            if (typeof resultObj.result[locationId].phone !== typeof undefined) {
+                                phone = resultObj.result[locationId].phone;
+                                console.log("phone FOUND!", phone);
+                                resultDiv.append("Phone: " + phone);
+
+                            }
+                        });
+
+
                         $('#list').append(resultDiv)
                         $('#list').append($("<br>"))
                     }
                 }
             })
+
         });
     }
 
@@ -164,7 +191,6 @@ $(document).ready(function() {
 
     }
     // Initialize and add the map
-
 
 });
 
