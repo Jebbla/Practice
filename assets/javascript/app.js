@@ -24,7 +24,6 @@ $(document).ready(function() {
     });
     $("#selectID").change(function() {
         var selected = $(this).find('option:selected');
-
     })
     var materialsArr = [
         { name: "Air-Conditioners", id: 591 },
@@ -45,7 +44,6 @@ $(document).ready(function() {
         { name: "Truck-Tires", id: 633 },
         { name: "Vehicles", id: 267 },
         { name: "Washer/Dryers", id: 573 },
-
     ]
 
     materialsArr.forEach(function(element) {
@@ -64,9 +62,6 @@ $(document).ready(function() {
         optionTag.text(element)
         $("#radius").append(optionTag)
     });
-
-
-
 
     // var zipCode = "55407";
     // var materialID ="104";
@@ -103,21 +98,22 @@ $(document).ready(function() {
                 console.log(resultA);
                 var resultB = JSON.parse(resultA)
                 console.log(resultB);
+                console.log(resultB.result[0].longitude)
+                console.log(resultB.result[0].latitude)
+                var longitude = resultB.result[0].longitude;
+                var latitude = resultB.result[0].latitude;
+                drawMap(longitude, latitude);
                 if (typeof resultB.result !== typeof undefined) {
                     var resultDiv = $('<div>');
                     resultDiv.append("Name:", resultB.result[0].description, "<br>");
                     resultDiv.append("Distance:", resultB.result[0].distance);
                     $('#list').append(resultDiv)
-
                 }
             })
-
         });
     }
 
     // earthQuery();
-
-
     $("#submit").click(function(event) {
         event.preventDefault();
         var val = $('#materials').val();
@@ -130,13 +126,45 @@ $(document).ready(function() {
         $('#inlineFormInputName2').val('')
     })
 
-    function displayGif(response) {
-        $('#cartoons').empty();
-        for (var i = 0; i < response.data.length; i++) {
-            var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
-            var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
-                '" data-still=" ' + response.data[i].images.fixed_height_still.url +
-                ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
-        }
+    // // Initialize and add the map
+    function drawMap(longitude, latitude) {
+        //     // The location of target destination
+        var targetLocation = {
+            lat: longitude,
+            lng: latitude
+        };
+        //     // The map, centered at Uluru
+        var map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 4,
+                center: targetLocation
+            });
+        //     // The marker, positioned at Uluru
+        var marker = new google.maps.Marker({
+            position: targetLocation,
+            map: map
+        });
     }
+    // Initialize and add the map
+
+
 });
+
+function initMap(longitude, latitude) {
+    // The location of target destination
+    var targetLocation = {
+        lat: -93.2980409363637,
+        lng: 44.830624313775154
+    };
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 4,
+            center: targetLocation
+        });
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({
+        position: targetLocation,
+        map: map
+    });
+}
