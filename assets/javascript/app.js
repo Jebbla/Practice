@@ -109,8 +109,9 @@ $(document).ready(function() {
                 // creates for loop displaying name and distance
                 if (typeof resultB.result !== typeof undefined) {
                     for (var i = 0; i < resultB.result.length; i++) {
-                        var resultDiv = $('<div>');
-                        resultDiv.append("Name: " + resultB.result[i].description + ". Distance: " + resultB.result[i].distance);
+                        var resultDiv = $('<div id="facilities">');
+                        resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
+                        resultDiv.append("Distance: " + resultB.result[i].distance);
                         $('#list').append(resultDiv)
                         $('#list').append($("<br>"))
                     }

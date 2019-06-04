@@ -35,6 +35,11 @@ h1 {
     width: 100%;
 }
 
+#facilities {
+    font-family: Arial;
+    padding: 5px;
+}
+
 #inputRow {
     margin-bottom: 5px;
 }
