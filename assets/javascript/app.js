@@ -104,12 +104,16 @@ $(document).ready(function() {
                 console.log(resultB.result[0].latitude)
                 var longitude = resultB.result[0].longitude;
                 var latitude = resultB.result[0].latitude;
-                drawMap(longitude, latitude, markers);
+                // sends longitude, latitude, and resultB.results to our map
+                drawMap(longitude, latitude, resultB.result);
+                // creates for loop displaying name and distance
                 if (typeof resultB.result !== typeof undefined) {
-                    var resultDiv = $('<div>');
-                    resultDiv.append("Name:", resultB.result[0].description, "<br>");
-                    resultDiv.append("Distance:", resultB.result[0].distance);
-                    $('#list').append(resultDiv)
+                    for (var i = 0; i < resultB.result.length; i++) {
+                        var resultDiv = $('<div>');
+                        resultDiv.append("Name: " + resultB.result[i].description + ". Distance: " + resultB.result[i].distance);
+                        $('#list').append(resultDiv)
+                        $('#list').append($("<br>"))
+                    }
                 }
             })
         });
@@ -148,6 +152,14 @@ $(document).ready(function() {
             position: targetLocation,
             map: map
         });
+        // loops through 'markers' array
+        for (var i = 0; i < markers.length; i++) {
+
+            var marker = new google.maps.Marker({
+                position: { lat: markers[i].latitude, lng: markers[i].longitude },
+                map: map
+            });
+        }
 
     }
     // Initialize and add the map
