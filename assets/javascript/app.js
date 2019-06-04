@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    var radius;
     var zipCode;
 
     var granimInstance = new Granim({
@@ -24,7 +25,6 @@ $(document).ready(function() {
     });
     $("#selectID").change(function() {
         var selected = $(this).find('option:selected');
-
     })
     var materialsArr = [
         { name: "Air-Conditioners", id: 591 },
@@ -45,7 +45,6 @@ $(document).ready(function() {
         { name: "Truck-Tires", id: 633 },
         { name: "Vehicles", id: 267 },
         { name: "Washer/Dryers", id: 573 },
-
     ]
 
     materialsArr.forEach(function(element) {
@@ -64,9 +63,6 @@ $(document).ready(function() {
         optionTag.text(element)
         $("#radius").append(optionTag)
     });
-
-
-
 
     // var zipCode = "55407";
     // var materialID ="104";
@@ -87,7 +83,8 @@ $(document).ready(function() {
             var parsedResponse = JSON.parse(response);
             latitude = parsedResponse.result.latitude;
             longitude = parsedResponse.result.longitude;
-            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
+            city = parsedResponse.result.city;
+            console.log("https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
                 "&latitude=" + latitude +
                 "&longitude=" + longitude +
                 "&material_id=" + materialIdfromPage);
@@ -96,19 +93,54 @@ $(document).ready(function() {
                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
                     "&latitude=" + latitude +
                     "&longitude=" + longitude +
-                    "&material_id=" + materialIdfromPage,
+                    "&material_id=" + materialIdfromPage +
+                    "&max_distance=" + radius,
 
             }).then(function(resultA) {
                 //logic for actual location data
                 console.log(resultA);
                 var resultB = JSON.parse(resultA)
                 console.log(resultB);
+                console.log(resultB.result[0].longitude)
+                console.log(resultB.result[0].latitude)
+                var longitude = resultB.result[0].longitude;
+                var latitude = resultB.result[0].latitude;
+                // sends longitude, latitude, and resultB.results to our map
+                drawMap(longitude, latitude, resultB.result);
+                // creates for loop displaying name and distance
                 if (typeof resultB.result !== typeof undefined) {
-                    var resultDiv = $('<div>');
-                    resultDiv.append("Name:", resultB.result[0].description, "<br>");
-                    resultDiv.append("Distance:", resultB.result[0].distance);
-                    $('#list').append(resultDiv)
+                    for (var i = 0; i < resultB.result.length; i++) {
+                        var locationId = resultB.result[i].location_id;
+                        var address = "";
+                        var resultDiv = $('<div id="facilities">');
+                        resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
+                        resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
+                        $.ajax({
+                            method: "GET",
+                            url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
+                                "&location_id=" + locationId,
 
+                            // appends address
+                        }).then(function(locationResult) {
+                            var resultObj = JSON.parse(locationResult)
+                            if (typeof resultObj.result[locationId].address !== typeof undefined) {
+                                address = resultObj.result[locationId].address + " " + resultObj.result[locationId].city;
+                                console.log("address FOUND!", address);
+                                resultDiv.append("Address: " + address + "<br>");
+                            }
+                            //appends phone number 
+                            if (typeof resultObj.result[locationId].phone !== typeof undefined) {
+                                phone = resultObj.result[locationId].phone;
+                                console.log("phone FOUND!", phone);
+                                resultDiv.append("Phone: " + phone);
+
+                            }
+                        });
+
+
+                        $('#list').append(resultDiv)
+                        $('#list').append($("<br>"))
+                    }
                 }
             })
 
@@ -116,8 +148,6 @@ $(document).ready(function() {
     }
 
     // earthQuery();
-
-
     $("#submit").click(function(event) {
         event.preventDefault();
         var val = $('#materials').val();
@@ -128,15 +158,57 @@ $(document).ready(function() {
         console.log('zipCode====', zipCode)
         earthQuery(materialID);
         $('#inlineFormInputName2').val('')
+        radius = $('#radius').val();
+
     })
 
-    function displayGif(response) {
-        $('#cartoons').empty();
-        for (var i = 0; i < response.data.length; i++) {
-            var rating = "<div class='ratings'> Rating:  " + (response.data[i].rating) + " </div>";
-            var image = rating + '<img src= " ' + response.data[i].images.fixed_height_still.url +
-                '" data-still=" ' + response.data[i].images.fixed_height_still.url +
-                ' " data-animate=" ' + response.data[i].images.fixed_height.url + '" data-state="still" class="movImage" style= "width:250px; height:250px">';
+    // // Initialize and add the map
+    function drawMap(longitude, latitude, markers) {
+        //     // The location of target destination
+        var targetLocation = {
+            lat: latitude,
+            lng: longitude
+        };
+        //     // The map, centered at target locations
+        var map = new google.maps.Map(
+            document.getElementById('map'), {
+                zoom: 8,
+                center: targetLocation
+            });
+        //     // The marker, positioned at target locations
+        var marker = new google.maps.Marker({
+            position: targetLocation,
+            map: map
+        });
+        // loops through 'markers' array
+        for (var i = 0; i < markers.length; i++) {
+
+            var marker = new google.maps.Marker({
+                position: { lat: markers[i].latitude, lng: markers[i].longitude },
+                map: map
+            });
         }
+
     }
+    // Initialize and add the map
+
 });
+
+function initMap(longitude, latitude) {
+    // The location of target destination
+    var targetLocation = {
+        lat: -93.2980409363637,
+        lng: 44.830624313775154
+    };
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 4,
+            center: targetLocation
+        });
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({
+        position: targetLocation,
+        map: map
+    });
+}

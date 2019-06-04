@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/javascript/granim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrKDN9t631L-p9EfkceoG4DqhbXakfWNQ&callback=initMap">
+    </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
@@ -21,54 +25,62 @@
 <body>
 
 
-    <canvas id="canvas-image-blending" width="1600" height="300"></canvas>
-    <h1>Recycle It!</h1>
-    <div id='recycle-form'>
-        <form class="form-inline">
-            <label class="sr-only" for="inlineFormInputName2">Zip Code</label>
-            <input id="zipCode" type="text" class="form-control mb-2 mr-sm-2" placeholder="Zip Code">
 
-            <select id="radius" class="form-control">
+    <body>
+
+        <div class="wrapper">
+            <canvas id="canvas-image-blending" width="1600" height="300"></canvas>
+            <div class="row">
+                <div class="col">
+                    <div id="head">
+                        <h1>Recycle It!</h1>
+                    </div>
+                </div>
+            </div>
+            <div id="br"></div>
+            <div id="inputRow">
+                <div class="row">
+                    <div class="col">
+                        <div id='recycle-form'>
+                            <form class="form-inline">
+                                <label class="sr-only" for="inlineFormInputName2">Zip Code</label>
+                                <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Zip Code">
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <select class="form-control" id="radius">
                 <option>Radius</option>
               </select>
-            <select id="materials" class="form-control">
+                    </div>
+                    <div class="col-2">
+                        <select class="form-control" id="materials">
                   <option>Materials</option>
                 </select>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="br"></div>
+            <div class="row">
+                <div class="col">
+                    <div id="map">Map placeholder</div>
+                </div>
+                <div class="col">
+                    <div id="list"></div>
+                </div>
+            </div>
+        </div>
+    </body>
 
-            <button type="submit" class="btn btn-primary mb-2" id="submit">Submit</button>
+    <script>
+    </script>
 
-
-
-        </form>
-
-
-
-
-        <!-- add this line for function to write into -->
-        <p id="demo"></p>
-
-        <script type="text/javascript">
-            function test() {
-                var userInput = document.getElementById("userInput").value;
-                document.getElementById("demo").innerHTML = userInput;
-            }
-        </script>
-
-
-
-        </form>
-        =======
-        <!--Granim.js -->
+    <footer>Awesomely designed by Laura, Vincent, and Jessica</footer>
 
 
-        <div class="container" id="list">List placeholder</div>
-
-        <!-- Map Display -->
-        <div id="map">Map placeholder</div>
-
-</body>
-
-<footer>Awesomely designed by Laura, Vincent, and Jessica</footer>
 
 
-</html>
+    </html>

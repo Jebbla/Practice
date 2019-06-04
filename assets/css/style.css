@@ -16,9 +16,32 @@ body {
 
 h1 {
     font-family: 'Acme', sans-serif;
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
-    z-index: 10;
+    /* margin: 10px; */
+}
+
+#head {
+    padding: 10px;
+}
+
+
+/* break after head */
+
+#br {
+    height: 1px;
+    background-color: #75797c1c;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+#facilities {
+    font-family: Arial;
+    padding: 5px;
+}
+
+#inputRow {
+    margin-bottom: 5px;
 }
 
 .form-inline {
@@ -26,33 +49,23 @@ h1 {
     text-align: center;
 }
 
+
+/* shifts input area to the right */
+
 #recycle-form {
     padding-left: 300px;
 }
 
 
-/* Set the size of the div element that contains the map */
+/* map display */
 
 #map {
-    height: 400px;
-    /* The height is 400 pixels */
+    height: 360px;
     width: 100%;
-    /* The width is the width of the web page */
 }
 
-
-/* Optional: Makes the sample page fill the window. */
-
-
-/* 
-html,
-body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-} */
-
 footer {
-    font-family: 'Acme', sans-serif;
+    display: block;
     text-align: center;
+    margin-top: 5%;
 }
