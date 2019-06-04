@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    var radius;
     var zipCode;
 
     var granimInstance = new Granim({
@@ -91,7 +92,8 @@ $(document).ready(function() {
                 url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.searchLocations?api_key=3fb6e10a90808f0d" +
                     "&latitude=" + latitude +
                     "&longitude=" + longitude +
-                    "&material_id=" + materialIdfromPage,
+                    "&material_id=" + materialIdfromPage +
+                    "&max_distance=" + radius,
 
             }).then(function(resultA) {
                 //logic for actual location data
@@ -102,7 +104,7 @@ $(document).ready(function() {
                 console.log(resultB.result[0].latitude)
                 var longitude = resultB.result[0].longitude;
                 var latitude = resultB.result[0].latitude;
-                drawMap(longitude, latitude);
+                drawMap(longitude, latitude, markers);
                 if (typeof resultB.result !== typeof undefined) {
                     var resultDiv = $('<div>');
                     resultDiv.append("Name:", resultB.result[0].description, "<br>");
@@ -124,26 +126,29 @@ $(document).ready(function() {
         console.log('zipCode====', zipCode)
         earthQuery(materialID);
         $('#inlineFormInputName2').val('')
+        radius = $('#radius').val();
+
     })
 
     // // Initialize and add the map
-    function drawMap(longitude, latitude) {
+    function drawMap(longitude, latitude, markers) {
         //     // The location of target destination
         var targetLocation = {
-            lat: longitude,
-            lng: latitude
+            lat: latitude,
+            lng: longitude
         };
-        //     // The map, centered at Uluru
+        //     // The map, centered at target locations
         var map = new google.maps.Map(
             document.getElementById('map'), {
-                zoom: 4,
+                zoom: 8,
                 center: targetLocation
             });
-        //     // The marker, positioned at Uluru
+        //     // The marker, positioned at target locations
         var marker = new google.maps.Marker({
             position: targetLocation,
             map: map
         });
+
     }
     // Initialize and add the map
 
