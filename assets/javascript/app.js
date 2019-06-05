@@ -115,6 +115,8 @@ $(document).ready(function() {
                         var resultDiv = $('<div id="facilities">');
                         resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
                         resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
+
+                        // ajax call for address and phone number
                         $.ajax({
                             method: "GET",
                             url: "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
@@ -122,7 +124,13 @@ $(document).ready(function() {
 
                             // appends address
                         }).then(function(locationResult) {
+                            // console.log("LOOK HERE", locationResult);
+                            // for (var i =0 ; )
                             var resultObj = JSON.parse(locationResult)
+                            var resultObject = [];
+
+
+                            console.log('resultObj++++++++', resultObj)
                             if (typeof resultObj.result[locationId].address !== typeof undefined) {
                                 address = resultObj.result[locationId].address + " " + resultObj.result[locationId].city;
                                 console.log("address FOUND!", address);
@@ -188,7 +196,6 @@ $(document).ready(function() {
                 map: map
             });
         }
-
     }
     // Initialize and add the map
 
