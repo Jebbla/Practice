@@ -116,6 +116,7 @@ $(document).ready(function() {
                         resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
                         resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
 
+
                         // ajax call for address and phone number
                         $.ajax({
                             method: "GET",
@@ -127,7 +128,12 @@ $(document).ready(function() {
                             // console.log("LOOK HERE", locationResult);
                             // for (var i =0 ; )
                             var resultObj = JSON.parse(locationResult)
-                            var resultObject = [];
+                            var phone;
+                            Object.keys(resultObj.result).forEach(function(element) {
+                                phone = resultObj.result[element].phone
+                            });
+                            // write to me!!!!!
+                            resultDiv.append("Phone: " + phone);
 
 
                             console.log('resultObj++++++++', resultObj)
