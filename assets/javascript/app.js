@@ -109,14 +109,9 @@ $(document).ready(function() {
                 drawMap(longitude, latitude, resultB.result);
                 // creates for loop displaying name and distance
                 if (typeof resultB.result !== typeof undefined) {
-                    for (var i = 0; i < resultB.result.length; i++) {
-                        var locationId = resultB.result[i].location_id;
-                        var address = "";
-                        var resultDiv = $('<div id="facilities">');
-                        resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
-                        resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
-
-
+                    for (let i = 0; i < resultB.result.length; i++) {
+                        let locationId = resultB.result[i].location_id;
+                        console.log("LOCATION ID------>", locationId);
                         // ajax call for address and phone number
                         $.ajax({
                             method: "GET",
@@ -125,35 +120,34 @@ $(document).ready(function() {
 
                             // appends address
                         }).then(function(locationResult) {
-                            // console.log("LOOK HERE", locationResult);
-                            // for (var i =0 ; )
                             var resultObj = JSON.parse(locationResult)
                             var phone;
-                            Object.keys(resultObj.result).forEach(function(element) {
-                                phone = resultObj.result[element].phone
-                            });
-                            // write to me!!!!!
-                            resultDiv.append("Phone: " + phone);
+                            var address;
 
+                            var resultDiv = $('<div id="facilities">');
+                            resultDiv.append("Name: " + resultB.result[i].description).append($("<br>"));
+                            resultDiv.append("Distance: " + resultB.result[i].distance).append($("<br>"));
 
-                            console.log('resultObj++++++++', resultObj)
+                            console.log("location ID------->", locationId);
+
+                            // appends address
                             if (typeof resultObj.result[locationId].address !== typeof undefined) {
                                 address = resultObj.result[locationId].address + " " + resultObj.result[locationId].city;
-                                console.log("address FOUND!", address);
+                                console.log("address--------->", address);
                                 resultDiv.append("Address: " + address + "<br>");
                             }
-                            //appends phone number 
+                            // appends phone number 
                             if (typeof resultObj.result[locationId].phone !== typeof undefined) {
                                 phone = resultObj.result[locationId].phone;
-                                console.log("phone FOUND!", phone);
+                                console.log("phone---------->", phone);
                                 resultDiv.append("Phone: " + phone);
-
                             }
+
+                            // displays results
+                            $('#list').append(resultDiv)
+                            $('#list').append($("<br>"))
                         });
 
-
-                        $('#list').append(resultDiv)
-                        $('#list').append($("<br>"))
                     }
                 }
             })
