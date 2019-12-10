@@ -23,7 +23,7 @@ $(document).ready(function() {
     },
   });
 
-  // array to be used in drop-down. IDs are referencing material IDs from Earth911 API
+  // array used in materials drop-down. IDs are referencing material IDs from Earth911 API
   var materialsArr = [
     { name: "Air-Conditioners", id: 591 },
     { name: "Aluminum-Cans", id: 70 },
@@ -53,6 +53,7 @@ $(document).ready(function() {
     $("#materials").append(optionTag);
   });
 
+  // array used in radius drop-down
   var radiusArr = ["5", "10", "15", "25", "50"];
 
   radiusArr.forEach(function(element) {
