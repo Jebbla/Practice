@@ -10,5 +10,5 @@ This game is part of the University of Minnesota's Web Application Development p
 The result is an aesthetically simple design that users can use to quickly look up Recycling Facility addresses.
 
 *** Improvements ***
-I want to utilize Google Maps API's greater powers such as directions and site-linking abilities. Restyling and phone compatability improvements are also on the way.
+I want to utilize Google Maps API's greater powers such as directions and site-linking abilities.
 
