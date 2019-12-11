@@ -188,7 +188,7 @@ $(document).ready(function() {
     radius = $("#radius").val();
   });
 
-  // // Initialize and add the map
+  // Initialize and add the map
   function drawMap(longitude, latitude, markers) {
     //     // The location of target destination
     var targetLocation = {
@@ -216,6 +216,7 @@ $(document).ready(function() {
   // Initialize and add the map
 });
 
+// Inital map location
 function initMap(longitude, latitude) {
   // The location of target destination
   var targetLocation = {
