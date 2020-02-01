@@ -8,7 +8,7 @@ $(document).ready(function() {
     isPausedWhenNotInView: true,
     image: {
       source: "assets/images/mountain2.jpg",
-      blendingMode: "hue",
+      blendingMode: "hue"
     },
     states: {
       "default-state": {
@@ -16,11 +16,11 @@ $(document).ready(function() {
           ["#29323c", "#485563"],
           ["#FF6B6B", "#556270"],
           ["#80d3fe", "#7ea0c4"],
-          ["#f0ab51", "#eceba3"],
+          ["#f0ab51", "#eceba3"]
         ],
-        transitionSpeed: 7000,
-      },
-    },
+        transitionSpeed: 7000
+      }
+    }
   });
 
   // array used in materials drop-down. IDs are referencing material IDs from Earth911 API
@@ -42,7 +42,7 @@ $(document).ready(function() {
     { name: "Tires", id: 5 },
     { name: "Truck-Tires", id: 633 },
     { name: "Vehicles", id: 267 },
-    { name: "Washer/Dryers", id: 573 },
+    { name: "Washer/Dryers", id: 573 }
   ];
 
   materialsArr.forEach(function(element) {
@@ -56,9 +56,9 @@ $(document).ready(function() {
   // array used in radius drop-down
   var radiusArr = ["5", "10", "15", "25", "50"];
 
-  radiusArr.forEach(function(element) {
+  radiusArr.forEach(function(radiusChoice) {
     var optionTag = $("<option>");
-    optionTag.text(element);
+    optionTag.text(radiusChoice);
     $("#radius").append(optionTag);
   });
 
@@ -76,7 +76,7 @@ $(document).ready(function() {
 
     $.ajax({
       method: "GET",
-      url: queryURL,
+      url: queryURL
     }).then(function(response) {
       console.log(response);
       var parsedResponse = JSON.parse(response);
@@ -103,7 +103,7 @@ $(document).ready(function() {
           "&material_id=" +
           materialIdfromPage +
           "&max_distance=" +
-          radius,
+          radius
       }).then(function(resultA) {
         //logic for actual location data
         console.log(resultA);
@@ -126,7 +126,7 @@ $(document).ready(function() {
               url:
                 "https://cors-anywhere.herokuapp.com/https://api.earth911.com/earth911.getLocationDetails?api_key=3fb6e10a90808f0d" +
                 "&location_id=" +
-                locationId,
+                locationId
 
               // appends address
             }).then(function(locationResult) {
@@ -193,23 +193,23 @@ $(document).ready(function() {
     //     // The location of target destination
     var targetLocation = {
       lat: latitude,
-      lng: longitude,
+      lng: longitude
     };
     //     // The map, centered at target locations
     var map = new google.maps.Map(document.getElementById("map"), {
       zoom: 8,
-      center: targetLocation,
+      center: targetLocation
     });
     //     // The marker, positioned at target locations
     var marker = new google.maps.Marker({
       position: targetLocation,
-      map: map,
+      map: map
     });
     // loops through 'markers' array
     for (var i = 0; i < markers.length; i++) {
       var marker = new google.maps.Marker({
         position: { lat: markers[i].latitude, lng: markers[i].longitude },
-        map: map,
+        map: map
       });
     }
   }
@@ -221,16 +221,16 @@ function initMap(longitude, latitude) {
   // The location of target destination
   var targetLocation = {
     lat: -93.2980409363637,
-    lng: 44.830624313775154,
+    lng: 44.830624313775154
   };
   // The map, centered at Uluru
   var map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
-    center: targetLocation,
+    center: targetLocation
   });
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({
     position: targetLocation,
-    map: map,
+    map: map
   });
 }
