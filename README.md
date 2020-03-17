@@ -19,7 +19,7 @@ git clone git@github.com:Jebbla/Recycle-It.git
 ```
 2. CD into the repo and open the following file in default-browser:
 ```
-ndex.html
+index.html
 ```
 
 ## Technologies Used
