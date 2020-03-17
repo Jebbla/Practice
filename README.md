@@ -1,8 +1,8 @@
-# Recycle-It
+# Recycle-It Finder
 This application utilizes gradient-effects, data-filtering, AJAX-requests, and modifies AJAX responses to be used in Google Maps API.
 
 ## Feature Overview
-Recycle-It is a quick and easy way to locate recycling-facilities near you. The user simply puts in their zipcode, radius limit and material-type.
+Recycle-It Finder is a quick and easy way to locate recycling-facilities near you. The user simply puts in their zipcode, radius limit and material-type.
 
 ## Motivation
 This application is part of the University of Minnesota's Web Application Development program in which students utilize their newly-found API retrieval abilities. Our team wanted a challenge so we decided to use a minimum of 3 APIs: Earth911, Granim.JS, and Google Earth Engine API. I felt it challenging yet rewarding to create functions capable of "cracking" into the complex databases of Earth911 and Google Maps. 
